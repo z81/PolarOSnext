@@ -1,0 +1,44 @@
+
+.controls {
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  .close {
+      width: 12px;
+      height: 12px;
+      background-color: #fc605b;
+      display: inline-block;
+      border-radius: 12px;
+      margin-top: 4px;
+      margin-right: 5px;
+  }
+
+  .full {
+      width: 12px;
+      height: 12px;
+      background-color: #34c84a;
+      display: inline-block;
+      border-radius: 12px;
+      margin-top: 4px;
+      margin-right: 5px;
+  }
+
+  .min {
+      width: 12px;
+      height: 12px;
+      background-color: #fdbc40;
+      display: inline-block;
+      border-radius: 12px;
+      margin-top: 4px;
+      margin-right: 5px;
+  }
+}
+
+.windows>* {
+  position: fixed;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0,0,0,.1);
+  border: 1px solid #bebebe;
+  border-radius: 6px;
+}
