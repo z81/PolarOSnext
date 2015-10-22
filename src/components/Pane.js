@@ -4,7 +4,7 @@ class Pane extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     sidebar: PropTypes.any,
-    size:
+    size: PropTypes.any
   }
   constructor(props) {
     super(props);

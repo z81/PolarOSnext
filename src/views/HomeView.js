@@ -6,7 +6,8 @@ import Windows from '../components/Window/Windows.js';
 import Tabs from '../components/Tabs';
 import Tab from '../components/Tab';
 import Button from '../components/Button';
-
+import Pane from '../components/Pane';
+import PaneGroup from '../components/PaneGroup';
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
@@ -112,7 +113,11 @@ export class HomeView extends Component {
 
           <Window
             key={'test2'} left={10} top={140} width={350} height={300} title={'title2'} id={0} sort={100}>
-            test
+            <PaneGroup>
+              <Pane sidebar size="sm">
+                yrdy
+              </Pane>
+            </PaneGroup>
           </Window>
         </Windows>
       </div>
