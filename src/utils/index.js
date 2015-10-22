@@ -40,3 +40,13 @@ export function createDevToolsWindow (store) {
       , win.document.getElementById('react-devtools-root'));
   }, 10);
 }
+
+export function diffObject(obj, deleteProps) {
+  const newObj = {};
+  for (const key in obj) {
+    if (deleteProps.indexOf(key) === -1) {
+      newObj[key] = obj[key];
+    }
+  }
+  return newObj;
+}
