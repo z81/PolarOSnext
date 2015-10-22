@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 React Redux Starter Kit
 =======================
 [![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
@@ -264,3 +265,6 @@ Troubleshooting
 ---------------
 
 Nothing yet. Having an issue? Report it and I'll get to it as soon as possible!
+=======
+# PolarOSnext
+>>>>>>> cb68d2456fa4dd9d86fdaae14086d55ae253f9b3
