@@ -63,12 +63,6 @@ export class HomeView extends Component {
   render () {
     return (
       <div className='container text-center'>
-        <h1>Welcome to the React Redux Starter Kit</h1>
-        <h2>Sample Counter: {this.props.counter}</h2>
-        <button className='btn btn-default'
-                onClick={this.props.actions.increment}>
-          Increment
-        </button>
         <button className='btn btn-default'
                 onClick={this.props.actions.addWindow.bind(this)}>
           add window
@@ -83,7 +77,7 @@ export class HomeView extends Component {
                    <Button left>Отмента</Button>,
                    <Button Style="primary" right>Сохранить</Button>
                  ]}
-                 header={<span>
+                 header={<span style={{width: '100%'}}>
                      <div className="btn-group">
                        <Button icon="home"/>
                        <Button icon="folder" active/>
@@ -110,8 +104,17 @@ export class HomeView extends Component {
                </Window>
             )
           })}
-        </Windows>
 
+          <Window
+            key={'test'} left={10} top={1} width={150} height={100} title={'title'} id={0} sort={100}>
+            test
+          </Window>
+
+          <Window
+            key={'test2'} left={10} top={140} width={350} height={300} title={'title2'} id={0} sort={100}>
+            test
+          </Window>
+        </Windows>
       </div>
     );
   }
