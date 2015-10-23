@@ -12,6 +12,8 @@ import Nav from '../components/Nav';
 import NavGroup from '../components/NavGroup';
 import Icon from '../components/Icon';
 import Table from '../components/Table';
+import ListGroup from '../components/ListGroup';
+import ListItem from '../components/ListItem';
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
@@ -128,6 +130,30 @@ export class HomeView extends Component {
                     <Icon icon="folder" text="folder"/>
                   </Nav>
                 </NavGroup>
+              </Pane>
+              <Pane>
+                <Table striped header={['Name', 'Value']} rows={[['Test', 2],['Nest',4]]}>
+                </Table>
+              </Pane>
+            </PaneGroup>
+          </Window>
+
+          <Window
+            key={'test3'} left={40} top={140} width={550} height={300} title={'title3'} id={0} sort={100}>
+            <PaneGroup>
+              <Pane sidebar size="sm">
+                <ListGroup>
+                  <ListItem header>
+                    <input className="form-control" type="text" placeholder="Search for someone"/>
+                  </ListItem>
+                  <ListItem active>
+                      <img className="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar.jpg" width="32" height="32"/>
+                      <div className="media-body">
+                        <strong>List item title</strong>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                      </div>
+                  </ListItem>
+                </ListGroup>
               </Pane>
               <Pane>
                 <Table striped header={['Name', 'Value']} rows={[['Test', 2],['Nest',4]]}>
