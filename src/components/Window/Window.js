@@ -30,6 +30,10 @@ class Window extends React.Component {
     };
   }
 
+  onActive() {
+    this.props.onActive(this.props.id);
+  }
+
   handleStart(event, ui) {
     // console.log('Event: ', event);
     // console.log('Position: ', ui.position);
@@ -43,10 +47,6 @@ class Window extends React.Component {
   handleStop(event, ui) {
     // console.log('Event: ', event);
     // console.log('Position: ', ui.position);
-  }
-
-  onActive() {
-    this.props.onActive(this.props.id);
   }
 
   // Todo: move style to class

@@ -10,7 +10,7 @@ class Button extends React.Component {
     dropdown: PropTypes.any,
     right: PropTypes.any,
     left: PropTypes.any,
-    active: PropTypes.any,
+    active: PropTypes.any
   }
   constructor(props) {
     super(props);
@@ -30,7 +30,7 @@ class Button extends React.Component {
     const Style = this.props.Style || 'default';
     let btnClass = `btn btn-${this.state.size} ${this.state.btnStyles[Style]}`;
     const realProps = diffObject(this.props, Object.keys(Button.propTypes));
-    let iconClass = "";
+    let iconClass = '';
 
     if (this.props.icon) {
       if (this.props.children) {

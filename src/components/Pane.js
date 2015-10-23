@@ -12,8 +12,8 @@ class Pane extends React.Component {
   }
 
   render() {
-    let className = "pane";
-    className += this.props.sidebar ? " sidebar" : "";
+    let className = 'pane';
+    className += this.props.sidebar ? ' sidebar' : '';
     className += this.props.size ? ` pane-${this.props.size}` : '';
 
     return (

@@ -8,6 +8,9 @@ import Tab from '../components/Tab';
 import Button from '../components/Button';
 import Pane from '../components/Pane';
 import PaneGroup from '../components/PaneGroup';
+import Nav from '../components/Nav';
+import NavGroup from '../components/NavGroup';
+import Icon from '../components/Icon';
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
@@ -63,7 +66,7 @@ export class HomeView extends Component {
 
   render () {
     return (
-      <div className='container text-center'>
+      <div className='container'>
         <button className='btn btn-default'
                 onClick={this.props.actions.addWindow.bind(this)}>
           add window
@@ -115,7 +118,18 @@ export class HomeView extends Component {
             key={'test2'} left={10} top={140} width={350} height={300} title={'title2'} id={0} sort={100}>
             <PaneGroup>
               <Pane sidebar size="sm">
-                yrdy
+                <NavGroup>
+                  <Nav title="test"/>
+                  <Nav active>
+                    <Icon icon="download" text="Download"/>
+                  </Nav>
+                  <Nav>
+                    <Icon icon="folder" text="folder"/>
+                  </Nav>
+                </NavGroup>
+              </Pane>
+              <Pane>
+                text
               </Pane>
             </PaneGroup>
           </Window>
