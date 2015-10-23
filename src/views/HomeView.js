@@ -11,6 +11,7 @@ import PaneGroup from '../components/PaneGroup';
 import Nav from '../components/Nav';
 import NavGroup from '../components/NavGroup';
 import Icon from '../components/Icon';
+import Table from '../components/Table';
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
@@ -115,7 +116,7 @@ export class HomeView extends Component {
           </Window>
 
           <Window
-            key={'test2'} left={10} top={140} width={350} height={300} title={'title2'} id={0} sort={100}>
+            key={'test2'} left={10} top={140} width={550} height={300} title={'title2'} id={0} sort={100}>
             <PaneGroup>
               <Pane sidebar size="sm">
                 <NavGroup>
@@ -129,7 +130,8 @@ export class HomeView extends Component {
                 </NavGroup>
               </Pane>
               <Pane>
-                text
+                <Table striped header={['Name', 'Value']} rows={[['Test', 2],['Nest',4]]}>
+                </Table>
               </Pane>
             </PaneGroup>
           </Window>
