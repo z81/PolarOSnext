@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react';
+import {diffObject} from '../utils';
 
 class Tabs extends Component {
   static propTypes = {
@@ -31,8 +32,10 @@ class Tabs extends Component {
   }
 
   render() {
+    const realProps = diffObject(this.props, Object.keys(Tabs.propTypes));
+
     return (
-      <div style={{width: '100%'}}>
+      <div {...realProps} style={{width: '100%'}}>
         <div className="tab-group" style={{width: '100%', height: '25px'}}>
           {this.props.children.map((tab, i)=> {
             return React.cloneElement(tab, {

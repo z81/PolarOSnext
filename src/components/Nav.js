@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import {diffObject} from '../utils';
 
 class Nav extends Component {
   static propTypes = {
@@ -16,10 +17,11 @@ class Nav extends Component {
       return (<h5 className="nav-group-title"> {this.props.title} </h5>);
     }
 
+    const realProps = diffObject(this.props, Object.keys(Nav.propTypes));
     const className = this.props.active ? 'nav-group-item active' : 'nav-group-item';
 
     return (
-      <span className={className}>
+      <span {...realProps} className={className}>
         {this.props.children}
       </span>
     );

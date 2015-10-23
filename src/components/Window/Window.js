@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Draggable  from 'react-draggable';
+import {diffObject} from '../../utils';
 // import flow from 'lodash/function/flow';
 import './Window.scss';
 
@@ -51,6 +52,7 @@ class Window extends React.Component {
 
   // Todo: move style to class
   render() {
+    const realProps = diffObject(this.props, Object.keys(Window.propTypes));
     return (
       <Draggable
       handle=".window>header>.title,.window>header>.title>*"
@@ -63,6 +65,7 @@ class Window extends React.Component {
       bounds="parent"
       >
           <div
+          {...realProps}
           style={{
             width:  `${this.props.width}px`,
             height:  `${this.props.height}px`,
