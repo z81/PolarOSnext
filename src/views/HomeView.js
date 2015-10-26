@@ -169,7 +169,7 @@ export class HomeView extends Component {
           </Window>
         </Windows>*/}
 
-        <Taskbar position="left"/>
+        <Taskbar position="bottom" windows={this.props.windows}/>
       </div>
     );
   }

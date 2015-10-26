@@ -15,8 +15,10 @@ class Taskbar extends Component {
     const className = this.props.position || 'bottom';
 
     return (
-      <span {...diffProps(this, Taskbar)} id="taskbar" className={className}>
-
+      <span {...diffProps(this, Taskbar)} id="taskbar" className={className} >
+        <span>
+          <div className="startBtn" />
+        </span>
       </span>
     );
   }
