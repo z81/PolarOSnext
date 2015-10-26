@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import {diffObject} from '../utils';
+import {diffProps} from '../../../utils';
 
 class ListItem extends Component {
   static propTypes = {
@@ -13,12 +13,10 @@ class ListItem extends Component {
   }
 
   render() {
-    const realProps = diffObject(this.props, Object.keys(ListItem.propTypes));
-
     let className = this.props.header ? 'list-group-header' : 'list-group-item';
     className += this.props.active ? ' active' : '';
 
-    return (<li {...realProps} className={className}>
+    return (<li {...diffProps(this, ListItem)} className={className}>
       {this.props.children}
     </li>);
   }

@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import {diffObject} from '../utils';
+import { diffProps } from '../../../utils';
 
 class Icon extends Component {
   static propTypes = {
@@ -13,10 +13,8 @@ class Icon extends Component {
   }
 
   render() {
-    const realProps = diffObject(this.props, Object.keys(Icon.propTypes));
-
     return (<span>
-      <span {...realProps} className={`icon icon-${this.props.icon}`} />
+      <span {...diffProps(this, Icon)} className={`icon icon-${this.props.icon}`} />
       {this.props.text}
     </span>);
   }

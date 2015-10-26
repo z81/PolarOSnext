@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {diffObject} from '../utils';
+import { diffProps } from '../../../utils';
 
 class Tab extends Component {
   static propTypes = {
@@ -9,7 +9,8 @@ class Tab extends Component {
     i: PropTypes.number,
     children: PropTypes.any,
     icon: PropTypes.string,
-    fixed: PropTypes.any
+    fixed: PropTypes.any,
+    title:  PropTypes.any
   }
   constructor(props) {
     super(props);
@@ -21,11 +22,9 @@ class Tab extends Component {
     let tabClassName = (this.props.active ? 'tab-item active' : 'tab-item');
     tabClassName += this.props.fixed ? ' tab-item-fixed' : '';
     const _onSelect =  this.props._onSelect || ()=>{};
-    const realProps = diffObject(this.props, Object.keys(Tab.propTypes));
-
 
     return (
-      <div {...realProps} className={tabClassName} onClick={_onSelect.bind('', this.props.i)}>
+      <div {...diffProps(this, Tab)} className={tabClassName} onClick={_onSelect.bind('', this.props.i)}>
         {!this.props.showClose || <span className="icon icon-cancel icon-close-tab"/>}
         {!this.props.icon || <span className={`icon icon-${this.props.icon}`}/>}
         {this.props.title}

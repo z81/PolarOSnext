@@ -50,3 +50,7 @@ export function diffObject(obj, deleteProps) {
   }
   return newObj;
 }
+
+export function diffProps(thisInst, component) {
+  return diffObject(thisInst.props, Object.keys(component.propTypes));
+}

@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
-import {diffObject} from '../utils';
+import React, {PropTypes, Component} from 'react';
+import { diffProps } from '../../../utils';
 
-class Table extends React.Component {
+class Table extends Component {
   static propTypes = {
     children: PropTypes.any,
     striped: PropTypes.any,
@@ -15,10 +15,8 @@ class Table extends React.Component {
 
   render() {
     const className = this.props.striped ? 'table-striped' : '';
-    const realProps = diffObject(this.props, Object.keys(Table.propTypes));
-
     return (
-      <table {...realProps} className={className}>
+      <table {...diffProps(this, Table)} className={className}>
         {!this.props.header || <thead>
           <tr>
             {this.props.header.map(h=><th>{h}</th>)}

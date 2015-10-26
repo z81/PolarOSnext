@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {diffObject} from '../utils';
+import { diffProps } from '../../../utils';
 
 class Button extends React.Component {
   static propTypes = {
@@ -29,7 +29,6 @@ class Button extends React.Component {
   render() {
     const Style = this.props.Style || 'default';
     let btnClass = `btn btn-${this.state.size} ${this.state.btnStyles[Style]}`;
-    const realProps = diffObject(this.props, Object.keys(Button.propTypes));
     let iconClass = '';
 
     if (this.props.icon) {
@@ -53,7 +52,7 @@ class Button extends React.Component {
     }
 
     return (
-      <button className={btnClass} {...realProps}>
+      <button className={btnClass} {...diffProps(this, Button)}>
       <span>
         <span className={iconClass}/>
         {this.props.children}

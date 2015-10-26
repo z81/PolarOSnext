@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {diffObject} from '../../utils';
+import { diffProps } from '../../../utils';
 
 class Windows extends Component {
   static propTypes = {
@@ -11,10 +11,7 @@ class Windows extends Component {
     this.state = {};
   }
   render() {
-    // const { connectDropTarget } = this.props;
-    const realProps = diffObject(this.props, Object.keys(Windows.propTypes));
-
-    return (<div {...realProps} className="windows" style={{width: '100vw', height: '100vh'}}>
+    return (<div {...diffProps(this, Windows)} className="windows" style={{width: '100vw', height: '100vh'}}>
         {this.props.children}
       </div>
     );

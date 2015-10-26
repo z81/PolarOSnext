@@ -1,19 +1,21 @@
 import React, { Component, PropTypes }     from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
-import Window from '../components/Window/Window.js';
-import Windows from '../components/Window/Windows.js';
-import Tabs from '../components/Tabs';
-import Tab from '../components/Tab';
-import Button from '../components/Button';
-import Pane from '../components/Pane';
-import PaneGroup from '../components/PaneGroup';
-import Nav from '../components/Nav';
-import NavGroup from '../components/NavGroup';
-import Icon from '../components/Icon';
-import Table from '../components/Table';
-import ListGroup from '../components/ListGroup';
-import ListItem from '../components/ListItem';
+import {
+  Window,
+  Windows,
+  Tabs,
+  Tab,
+  Button,
+  Pane,
+  PaneGroup,
+  Nav,
+  NavGroup,
+  Icon,
+  Table,
+  ListGroup,
+  ListItem
+} from '../components/Elements';
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
@@ -75,6 +77,7 @@ export class HomeView extends Component {
           add window
         </button>
 
+        {/* windows test */}
         <Windows>
             {this.props.windows.list.map((w, i)=> {
                return (
@@ -97,7 +100,7 @@ export class HomeView extends Component {
                      <Button icon="megaphone" dropdown right/>
                  </span>}
                >
-                  <Tabs active={this.state.active} onChange={(i)=>this.setState({active: i})}>
+                  <Tabs active={this.state.active} onChange={(j)=>this.setState({active: j})}>
                     <Tab title={'tab' + this.state.active}>
                       <b> 11111111</b>
                       <div>test</div>
@@ -109,7 +112,7 @@ export class HomeView extends Component {
                     <Tab icon="plus" fixed />
                   </Tabs>
                </Window>
-            )
+             );
           })}
 
          <Window
@@ -132,7 +135,7 @@ export class HomeView extends Component {
                 </NavGroup>
               </Pane>
               <Pane>
-                <Table striped header={['Name', 'Value']} rows={[['Test', 2],['Nest',4]]}>
+                <Table striped header={['Name', 'Value']} rows={[['Test', 2], ['Nest', 4]]}>
                 </Table>
               </Pane>
             </PaneGroup>
@@ -156,7 +159,7 @@ export class HomeView extends Component {
                 </ListGroup>
               </Pane>
               <Pane>
-                <Table striped header={['Name', 'Value']} rows={[['Test', 2],['Nest',4]]}>
+                <Table striped header={['Name', 'Value']} rows={[['Test', 2], ['Nest', 4]]}>
                 </Table>
               </Pane>
             </PaneGroup>

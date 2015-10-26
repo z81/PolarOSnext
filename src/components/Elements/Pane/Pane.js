@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {diffObject} from '../utils';
+import { diffProps } from '../../../utils';
 
 class Pane extends React.Component {
   static propTypes = {
@@ -16,10 +16,9 @@ class Pane extends React.Component {
     let className = 'pane';
     className += this.props.sidebar ? ' sidebar' : '';
     className += this.props.size ? ` pane-${this.props.size}` : '';
-    const realProps = diffObject(this.props, Object.keys(Pane.propTypes));
 
     return (
-      <div {...realProps} className={className}>
+      <div {...diffProps(this, Pane)} className={className}>
         {this.props.children}
       </div>
     );
