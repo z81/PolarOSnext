@@ -16,6 +16,9 @@ import {
   ListGroup,
   ListItem
 } from '../components/Elements';
+import {
+  Taskbar
+} from '../components';
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
@@ -78,7 +81,7 @@ export class HomeView extends Component {
         </button>
 
         {/* windows test */}
-        <Windows>
+        {/*<Windows>
             {this.props.windows.list.map((w, i)=> {
                return (
                <Window onActive={this.props.actions.setActiveWindow}
@@ -164,7 +167,9 @@ export class HomeView extends Component {
               </Pane>
             </PaneGroup>
           </Window>
-        </Windows>
+        </Windows>*/}
+
+        <Taskbar position="left"/>
       </div>
     );
   }

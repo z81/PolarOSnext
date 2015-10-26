@@ -1,0 +1,34 @@
+$height: 30px;
+
+#taskbar {
+  position: fixed;
+  background: gainsboro;
+}
+
+#taskbar.bottom {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: $height;
+}
+
+#taskbar.top {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: $height;
+}
+
+#taskbar.left {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: $height;
+}
+
+#taskbar.right {
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: $height;
+}
