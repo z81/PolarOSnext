@@ -81,7 +81,7 @@ export class HomeView extends Component {
         </button>
 
         {/* windows test */}
-        {/*<Windows>
+        {<Windows>
             {this.props.windows.list.map((w, i)=> {
                return (
                <Window onActive={this.props.actions.setActiveWindow}
@@ -167,9 +167,10 @@ export class HomeView extends Component {
               </Pane>
             </PaneGroup>
           </Window>
-        </Windows>*/}
+        </Windows>}
 
-        <Taskbar position="bottom" windows={this.props.windows}/>
+        <Taskbar position="bottom" windows={this.props.windows} onSelectWindow={this.props.actions.setActiveWindow} />
+
       </div>
     );
   }

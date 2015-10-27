@@ -1,0 +1,10 @@
+#taskbarwindowslist {
+  position: absolute;
+  .taskbar-window-item {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 35px;
+    padding: 10px;
+    border-right: 1px solid rgba(110, 180, 247, 0.84);
+  }
+}

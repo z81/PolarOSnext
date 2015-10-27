@@ -1,10 +1,13 @@
 import React, { PropTypes, Component } from 'react';
 import { diffProps } from '../../utils';
 import './Taskbar.scss';
+import { StartBtn, TaskbarWindowsList } from '../';
 
 class Taskbar extends Component {
   static propTypes = {
-    position: PropTypes.any
+    position: PropTypes.any,
+    windows: PropTypes.any,
+    onSelectWindow: PropTypes.any
   }
   constructor(props) {
     super(props);
@@ -17,7 +20,8 @@ class Taskbar extends Component {
     return (
       <span {...diffProps(this, Taskbar)} id="taskbar" className={className} >
         <span>
-          <div className="startBtn" />
+          <StartBtn />
+          <TaskbarWindowsList windows={this.props.windows} onActive={this.props.onSelectWindow}/>
         </span>
       </span>
     );
