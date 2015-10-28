@@ -23,6 +23,7 @@
   "dependencies": {
     "babel": "^5.8.23",
     "history": "^1.9.0",
+    "image-loader": "0.0.1",
     "invariant": "^2.1.0",
     "lodash": "^3.10.1",
     "photon": "git+https://github.com/connors/photon.git",
@@ -50,7 +51,9 @@
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.3.1",
     "extract-text-webpack-plugin": "^0.8.0",
+    "file-loader": "^0.8.4",
     "html-webpack-plugin": "^1.6.1",
+    "image-webpack-loader": "^1.6.2",
     "karma": "^0.13.8",
     "karma-coverage": "^0.5.0",
     "karma-mocha": "^0.2.0",
