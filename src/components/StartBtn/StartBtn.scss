@@ -5,3 +5,17 @@
   border: 1px solid #C3C3C3;
   display: inline-block;
 }
+
+#startbtn-menu {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  width: 100px;
+  height: auto;
+  min-height: 100px;
+  background: white;
+  border: 1px solid black;
+
+  box-shadow: inset 0 1px 0 #f5f4f5;
+  background-image: linear-gradient(to bottom, #e8e6e8 0, #d1cfd1 100%);
+}

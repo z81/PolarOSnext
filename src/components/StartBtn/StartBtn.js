@@ -6,14 +6,28 @@ class StartBtn extends Component {
   static propTypes = {
     position: PropTypes.any
   }
+
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      startShow: false
+    };
+  }
+
+  showMenu() {
+      this.setState({
+        startShow: !this.state.startShow
+      })
   }
 
   render() {
     return (
-      <span {...diffProps(this, StartBtn)} id="startbtn" />
+      <span>
+        {!this.state.startShow || <span id="startbtn-menu">
+          start menu
+        </span>}
+        <span {...diffProps(this, StartBtn)} id="startbtn" onClick={this.showMenu.bind(this)} />
+      </span>
     );
   }
 }
