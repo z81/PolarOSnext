@@ -84,8 +84,17 @@ export class HomeView extends Component {
         {<Windows>
             {this.props.windows.list.map((w, i)=> {
                return (
-               <Window onActive={this.props.actions.setActiveWindow}
-                 key={i} left={w.left} top={w.top} width={w.width} height={w.height} title={w.title} id={w.id} sort={w.sort}
+               <Window
+                 disabled={Window.MAX | Window.MIN}
+                 onActive={this.props.actions.setActiveWindow}
+                 key={i}
+                 left={w.left}
+                 top={w.top}
+                 width={w.width}
+                 height={w.height}
+                 title={w.title}
+                 id={w.id}
+                 sort={w.sort}
                  footer={[
                    <Button left>Отмента</Button>,
                    <Button Style="primary" right>Сохранить</Button>

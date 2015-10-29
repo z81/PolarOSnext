@@ -14,7 +14,7 @@
       margin-right: 5px;
   }
 
-  .full {
+  .max {
       width: 12px;
       height: 12px;
       background-color: #34c84a;
@@ -32,6 +32,10 @@
       border-radius: 12px;
       margin-top: 4px;
       margin-right: 5px;
+  }
+
+  .disabled {
+    background-color: #B0BFB3;
   }
 }
 

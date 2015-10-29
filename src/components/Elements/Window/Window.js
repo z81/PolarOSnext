@@ -4,6 +4,11 @@ import { diffProps } from '../../../utils';
 // import flow from 'lodash/function/flow';
 import './Window.scss';
 
+export const MIN  = 1;
+export const MAX  = 2;
+export const CLOSE = 4;
+export const ALL = (MAX | MIN | CLOSE);
+
 class Window extends React.Component {
   static propTypes = {
     left: PropTypes.number,
@@ -17,7 +22,9 @@ class Window extends React.Component {
     id: PropTypes.number,
     sort: PropTypes.number,
     footer: PropTypes.node,
-    header: PropTypes.node
+    header: PropTypes.node,
+    controls: PropTypes.any,
+    disabled: PropTypes.anydisabled
   }
 
   constructor(props) {
@@ -52,6 +59,8 @@ class Window extends React.Component {
 
   // Todo: move style to class
   render() {
+    const controls = this.props.controls || ALL;
+    const disabled = this.props.disabled || 0;
     return (
       <Draggable
       handle=".window>header>.title,.window>header>.title>*"
@@ -70,30 +79,34 @@ class Window extends React.Component {
             height:  `${this.props.height}px`,
             zIndex: (1000 + (500 - this.props.sort))
           }}>
-              <div onMouseDown={this.onActive.bind(this)} className="window" style={{borderRadius: '6px', position: 'fixed !important'}}>
-                <header className="toolbar toolbar-header" style={{borderRadius: '6px 6px 0 0'}}>
-                  <h1 className="title" style={{borderRadius: '6px 6px 0 0'}}>
-                    {this.props.title}
-                  <div className="controls">
-                      <div className="close"/>
-                      <div className="full"/>
-                      <div className="min"/>
-                    </div>
-                  </h1>
-                  {!this.props.header || <div className="toolbar-actions">
-                      {this.props.header}
-                  </div>}
-                </header>
+              <div
+                onMouseDown={this.onActive.bind(this)}
+                className="window" style={{borderRadius: '6px', position: 'fixed !important'}}
+                >
 
-                <div className="window-content">
-                  {this.props.children}
-                </div>
+                  <header className="toolbar toolbar-header" style={{borderRadius: '6px 6px 0 0'}}>
+                    <h1 className="title" style={{borderRadius: '6px 6px 0 0'}}>
+                      {this.props.title}
+                    <div className="controls">
+                        {!(controls & CLOSE) || <div className={(disabled & CLOSE) ? "disabled close" : "close"}/>}
+                        {!(controls & MAX) || <div className={(disabled & MAX) ? "disabled max" :  "max"}/>}
+                        {!(controls & MIN) || <div className={(disabled & MIN) ? "disabled min" :  "min"}/>}
+                      </div>
+                    </h1>
+                    {!this.props.header || <div className="toolbar-actions">
+                        {this.props.header}
+                    </div>}
+                  </header>
 
-               {!this.props.footer || <footer className="toolbar toolbar-footer">
-                <div className="toolbar-actions">
-                  {this.props.footer}
-                </div>
-               </footer>}
+                  <div className="window-content">
+                    {this.props.children}
+                  </div>
+
+                 {!this.props.footer || <footer className="toolbar toolbar-footer">
+                  <div className="toolbar-actions">
+                    {this.props.footer}
+                  </div>
+                 </footer>}
 
              </div>
           </div>
@@ -101,5 +114,10 @@ class Window extends React.Component {
     );
   }
 }
+
+Window.MIN   = MIN;
+Window.MAX   = MAX;
+Window.CLOSE = CLOSE;
+Window.ALL   = ALL;
 
 export default Window;
