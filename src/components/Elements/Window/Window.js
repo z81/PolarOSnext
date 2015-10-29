@@ -88,8 +88,8 @@ class Window extends React.Component {
                     <h1 className="title" style={{borderRadius: '6px 6px 0 0'}}>
                       {this.props.title}
                     <div className="controls">
-                        {!(controls & MIN) || <div className={(disabled & MIN) ? "disabled min" :  "min"}/>}
-                        {!(controls & MAX) || <div className={(disabled & MAX) ? "disabled max" :  "max"}/>}
+                        {!(controls & MIN) || <div className={(disabled & MIN) ? "disabled min" : "min"}/>}
+                        {!(controls & MAX) || <div className={(disabled & MAX) ? "disabled max" : "max"}/>}
                         {!(controls & CLOSE) || <div className={(disabled & CLOSE) ? "disabled close" : "close"}/>}
                       </div>
                     </h1>

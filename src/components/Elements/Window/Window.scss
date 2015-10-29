@@ -1,5 +1,24 @@
 
+
+.controls > * {
+  line-height: 11px;
+  font-size: 2em;
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+}
+
+.controls > *::before {
+  content: '\0';
+  font-size: 0px;
+  vertical-align: top;
+  line-height: 10px;
+}
+
 .controls {
+  font-family: FontAwesome;
+  color: rgba(0, 0, 0, 0.37);
   position: absolute;
   right: 0;
   top: 0;
@@ -12,6 +31,7 @@
       border-radius: 12px;
       margin-top: 4px;
       margin-right: 5px;
+      border: 1px solid #fb1710;
   }
 
   .max {
@@ -22,6 +42,7 @@
       border-radius: 12px;
       margin-top: 4px;
       margin-right: 5px;
+      border: 1px solid #29a03b;
   }
 
   .min {
@@ -32,11 +53,37 @@
       border-radius: 12px;
       margin-top: 4px;
       margin-right: 5px;
+      border: 1px solid #E49A0C;
   }
 
   .disabled {
     background-color: #B0BFB3;
   }
+}
+
+.window {
+   .title:hover .controls{
+      .close::before {
+          content: "\f00d";
+          font-size: 11px;
+          line-height: 12px;
+          vertical-align: top;
+      }
+
+      .max::before {
+          content: "\f0c8";
+          font-size: 8px;
+          vertical-align: top;
+          line-height: 10px;
+      }
+
+      .min::before {
+          content: "\f068";
+          font-size: 8px;
+          vertical-align: bottom;
+          line-height: 9px;
+      }
+   }
 }
 
 .windows>* {
