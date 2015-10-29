@@ -33,6 +33,7 @@ const actionCreators = {
     }
   }),
   setActiveWindow: (active) => ({ type : 'WINDOWS_SET_ACTIVE', payload: active }),
+  onClose: (id) => ({ type : 'WINDOWS_CLOSE', payload: id }),
 };
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
@@ -44,6 +45,7 @@ const mapStateToProps = (state) => ({
   counter : state.counter,
   windows : state.windows
 });
+
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
 });
@@ -87,12 +89,13 @@ export class HomeView extends Component {
                <Window
                  disabled={Window.MAX | Window.MIN}
                  onActive={this.props.actions.setActiveWindow}
+                 onClose={this.props.actions.onClose}
                  key={i}
                  left={w.left}
                  top={w.top}
                  width={w.width}
                  height={w.height}
-                 title={w.title}
+                 title={w.id}
                  id={w.id}
                  sort={w.sort}
                  footer={[

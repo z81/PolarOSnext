@@ -19,6 +19,7 @@ class Window extends React.Component {
     children: PropTypes.any,
     active: PropTypes.number,
     onActive: PropTypes.func,
+    onClose: PropTypes.func,
     id: PropTypes.number,
     sort: PropTypes.number,
     footer: PropTypes.node,
@@ -61,6 +62,7 @@ class Window extends React.Component {
   render() {
     const controls = this.props.controls || ALL;
     const disabled = this.props.disabled || 0;
+    const close = () => this.props.onClose(this.props.id);
     return (
       <Draggable
       handle=".window>header>.title,.window>header>.title>*"
@@ -90,7 +92,7 @@ class Window extends React.Component {
                     <div className="controls">
                         {!(controls & MIN) || <div className={(disabled & MIN) ? "disabled min" : "min"}/>}
                         {!(controls & MAX) || <div className={(disabled & MAX) ? "disabled max" : "max"}/>}
-                        {!(controls & CLOSE) || <div className={(disabled & CLOSE) ? "disabled close" : "close"}/>}
+                        {!(controls & CLOSE) || <div onClick={close} className={(disabled & CLOSE) ? "disabled close" : "close"}/>}
                       </div>
                     </h1>
                     {!this.props.header || <div className="toolbar-actions">

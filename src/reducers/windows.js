@@ -4,6 +4,7 @@ import { createReducer } from 'utils';
 // this starter kit as small as possible we'll just define it here.
 const WINDOWS_ADD = 'WINDOWS_ADD';
 const WINDOWS_SET_ACTIVE = 'WINDOWS_SET_ACTIVE';
+const WINDOWS_CLOSE = 'WINDOWS_CLOSE';
 
 const initialState = {
   list: [],
@@ -23,6 +24,17 @@ export default createReducer(initialState, {
       return w;
     });
 
+    return Object.assign({}, state);
+  },
+  [WINDOWS_CLOSE] : (state, id) => {
+    let newList = [];
+    state.list.forEach((w, i)=> {
+      if (id !== w.id) {
+        newList.push(w);
+      }
+    });
+
+    state.list = newList;
     return Object.assign({}, state);
   }
 });
