@@ -20,12 +20,16 @@ class Window extends React.Component {
     active: PropTypes.number,
     onActive: PropTypes.func,
     onClose: PropTypes.func,
+    onMax: PropTypes.func,
+    onMin: PropTypes.func,
     id: PropTypes.number,
     sort: PropTypes.number,
     footer: PropTypes.node,
     header: PropTypes.node,
     controls: PropTypes.any,
-    disabled: PropTypes.anydisabled
+    disabled: PropTypes.any,
+    min: PropTypes.any,
+    max: PropTypes.any
   }
 
   constructor(props) {
@@ -62,10 +66,15 @@ class Window extends React.Component {
   render() {
     const controls = this.props.controls || ALL;
     const disabled = this.props.disabled || 0;
-    const close = () => this.props.onClose(this.props.id);
+    const close = () => !this.props.onClose || this.props.onClose(this.props.id);
+    const min = () => !this.props.onMin || this.props.onMin(this.props.id);
+    const max = () => !this.props.onMax || this.props.onMax(this.props.id);
+    let className = '';
+    className += (!this.props.min && !(disabled & MIN)) || ' window-min ';
+    className += (!this.props.max && !(disabled & MAX))  || ' window-max ';
     return (
       <Draggable
-      handle=".window>header>.title,.window>header>.title>*"
+      handle='.window>header>.title,.window>header>.title>*'
       start={{x: this.props.left, y: this.props.top}}
       moveOnStartChange={false}
       zIndex={1800}
@@ -80,7 +89,9 @@ class Window extends React.Component {
             width:  `${this.props.width}px`,
             height:  `${this.props.height}px`,
             zIndex: (1000 + (500 - this.props.sort))
-          }}>
+          }}
+          className={className}
+          >
               <div
                 onMouseDown={this.onActive.bind(this)}
                 className="window" style={{borderRadius: '6px', position: 'fixed !important'}}
@@ -90,8 +101,8 @@ class Window extends React.Component {
                     <h1 className="title" style={{borderRadius: '6px 6px 0 0'}}>
                       {this.props.title}
                     <div className="controls">
-                        {!(controls & MIN) || <div className={(disabled & MIN) ? "disabled min" : "min"}/>}
-                        {!(controls & MAX) || <div className={(disabled & MAX) ? "disabled max" : "max"}/>}
+                        {!(controls & MIN) || <div onClick={min} className={(disabled & MIN) ? "disabled min" : "min"}/>}
+                        {!(controls & MAX) || <div onClick={max} className={(disabled & MAX) ? "disabled max" : "max"}/>}
                         {!(controls & CLOSE) || <div onClick={close} className={(disabled & CLOSE) ? "disabled close" : "close"}/>}
                       </div>
                     </h1>

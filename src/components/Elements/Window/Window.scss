@@ -109,6 +109,10 @@
    }
 }
 
+.window-min {
+  display: none;
+}
+
 .windows>* {
   position: fixed;
   overflow: hidden;

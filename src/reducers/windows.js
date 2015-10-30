@@ -5,6 +5,9 @@ import { createReducer } from 'utils';
 const WINDOWS_ADD = 'WINDOWS_ADD';
 const WINDOWS_SET_ACTIVE = 'WINDOWS_SET_ACTIVE';
 const WINDOWS_CLOSE = 'WINDOWS_CLOSE';
+const WINDOWS_MIN = 'WINDOWS_MIN';
+const WINDOWS_MAX = 'WINDOWS_MAX';
+const WINDOWS_UNMIN = 'WINDOWS_UNMIN';
 
 const initialState = {
   list: [],
@@ -35,6 +38,36 @@ export default createReducer(initialState, {
     });
 
     state.list = newList;
+    return Object.assign({}, state);
+  },
+  [WINDOWS_MIN] : (state, id) => {
+    state.list.map((w, i)=> {
+      if (id !== w.id) {
+        w.min = true;
+      }
+      return w;
+    });
+
+    return Object.assign({}, state);
+  },
+  [WINDOWS_UNMIN] : (state, id) => {
+    state.list.map((w, i)=> {
+      if (id !== w.id) {
+        w.min = false;
+      }
+      return w;
+    });
+
+    return Object.assign({}, state);
+  },
+  [WINDOWS_MAX] : (state, id) => {
+    state.list.map((w, i)=> {
+      if (id !== w.id) {
+        w.max = true;
+      }
+      return w;
+    });
+
     return Object.assign({}, state);
   }
 });

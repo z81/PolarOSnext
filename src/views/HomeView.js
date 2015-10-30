@@ -34,6 +34,9 @@ const actionCreators = {
   }),
   setActiveWindow: (active) => ({ type : 'WINDOWS_SET_ACTIVE', payload: active }),
   onClose: (id) => ({ type : 'WINDOWS_CLOSE', payload: id }),
+  onMin: (id) => ({ type : 'WINDOWS_MIN', payload: id }),
+  onUnMin: (id) => ({ type : 'WINDOWS_UNMIN', payload: id }),
+  onMax: (id) => ({ type : 'WINDOWS_MAX', payload: id }),
 };
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
@@ -90,6 +93,8 @@ export class HomeView extends Component {
                  disabled={Window.MAX | Window.MIN}
                  onActive={this.props.actions.setActiveWindow}
                  onClose={this.props.actions.onClose}
+                 onMin={this.props.actions.onMin}
+                 onMax={this.props.actions.onMax}
                  key={i}
                  left={w.left}
                  top={w.top}
@@ -97,6 +102,8 @@ export class HomeView extends Component {
                  height={w.height}
                  title={w.id}
                  id={w.id}
+                 max={w.max}
+                 min={w.min}
                  sort={w.sort}
                  footer={[
                    <Button left>Отмента</Button>,
