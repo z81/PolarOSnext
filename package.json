@@ -22,6 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "babel": "^5.8.23",
+    "classnames": "^2.2.0",
     "history": "^1.9.0",
     "image-loader": "0.0.1",
     "invariant": "^2.1.0",

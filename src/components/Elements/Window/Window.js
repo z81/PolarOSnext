@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import Draggable  from 'react-draggable';
 import { diffProps } from '../../../utils';
-// import flow from 'lodash/function/flow';
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import classNames from 'classnames';
 import './Window.scss';
 
 export const MIN  = 1;
@@ -69,61 +70,63 @@ class Window extends React.Component {
     const close = () => !this.props.onClose || this.props.onClose(this.props.id);
     const min = () => !this.props.onMin || this.props.onMin(this.props.id);
     const max = () => !this.props.onMax || this.props.onMax(this.props.id);
-    let className = '';
-    className += (!this.props.min && !(disabled & MIN)) || ' window-min ';
-    className += (!this.props.max && !(disabled & MAX))  || ' window-max ';
+    let className = classNames({
+      'window-min': (this.props.min && (disabled ^ MIN)),
+      'window-max': (this.props.max && (disabled ^ MAX))
+    });
+    console.log(className, this.props);
     return (
-      <Draggable
-      handle='.window>header>.title,.window>header>.title>*'
-      start={{x: this.props.left, y: this.props.top}}
-      moveOnStartChange={false}
-      zIndex={1800}
-      onStart={this.handleStart}
-      onDrag={this.handleDrag}
-      onStop={this.handleStop}
-      bounds="parent"
-      >
-          <div
-          {...diffProps(this, Window)}
-          style={{
-            width:  `${this.props.width}px`,
-            height:  `${this.props.height}px`,
-            zIndex: (1000 + (500 - this.props.sort))
-          }}
-          className={className}
-          >
-              <div
-                onMouseDown={this.onActive.bind(this)}
-                className="window" style={{borderRadius: '6px', position: 'fixed !important'}}
-                >
+        <Draggable
+        handle='.window>header>.title,.window>header>.title>*'
+        start={{x: this.props.left, y: this.props.top}}
+        moveOnStartChange={false}
+        zIndex={1800}
+        onStart={this.handleStart}
+        onDrag={this.handleDrag}
+        onStop={this.handleStop}
+        bounds="parent"
+        >
+            <div
+            {...diffProps(this, Window)}
+            style={{
+              width:  `${this.props.width}px`,
+              height:  `${this.props.height}px`,
+              zIndex: (1000 + (500 - this.props.sort))
+            }}
+            className={className}
+            >
+                <div
+                  onMouseDown={this.onActive.bind(this)}
+                  className="window" style={{borderRadius: '6px', position: 'fixed !important'}}
+                  >
 
-                  <header className="toolbar toolbar-header" style={{borderRadius: '6px 6px 0 0'}}>
-                    <h1 className="title" style={{borderRadius: '6px 6px 0 0'}}>
-                      {this.props.title}
-                    <div className="controls">
-                        {!(controls & MIN) || <div onClick={min} className={(disabled & MIN) ? "disabled min" : "min"}/>}
-                        {!(controls & MAX) || <div onClick={max} className={(disabled & MAX) ? "disabled max" : "max"}/>}
-                        {!(controls & CLOSE) || <div onClick={close} className={(disabled & CLOSE) ? "disabled close" : "close"}/>}
-                      </div>
-                    </h1>
-                    {!this.props.header || <div className="toolbar-actions">
-                        {this.props.header}
-                    </div>}
-                  </header>
+                    <header className="toolbar toolbar-header" style={{borderRadius: '6px 6px 0 0'}}>
+                      <h1 className="title" style={{borderRadius: '6px 6px 0 0'}}>
+                        {this.props.title}
+                      <div className="controls">
+                          {!(controls & MIN) || <div onClick={min} className={(disabled & MIN) ? "disabled min" : "min"}/>}
+                          {!(controls & MAX) || <div onClick={max} className={(disabled & MAX) ? "disabled max" : "max"}/>}
+                          {!(controls & CLOSE) || <div onClick={close} className={(disabled & CLOSE) ? "disabled close" : "close"}/>}
+                        </div>
+                      </h1>
+                      {!this.props.header || <div className="toolbar-actions">
+                          {this.props.header}
+                      </div>}
+                    </header>
 
-                  <div className="window-content">
-                    {this.props.children}
-                  </div>
+                    <div className="window-content">
+                      {this.props.children}
+                    </div>
 
-                 {!this.props.footer || <footer className="toolbar toolbar-footer">
-                  <div className="toolbar-actions">
-                    {this.props.footer}
-                  </div>
-                 </footer>}
+                   {!this.props.footer || <footer className="toolbar toolbar-footer">
+                    <div className="toolbar-actions">
+                      {this.props.footer}
+                    </div>
+                   </footer>}
 
-             </div>
-          </div>
-      </Draggable>
+               </div>
+            </div>
+        </Draggable>
     );
   }
 }

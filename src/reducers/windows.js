@@ -42,7 +42,7 @@ export default createReducer(initialState, {
   },
   [WINDOWS_MIN] : (state, id) => {
     state.list.map((w, i)=> {
-      if (id !== w.id) {
+      if (id === w.id) {
         w.min = true;
       }
       return w;
@@ -52,7 +52,7 @@ export default createReducer(initialState, {
   },
   [WINDOWS_UNMIN] : (state, id) => {
     state.list.map((w, i)=> {
-      if (id !== w.id) {
+      if (id === w.id) {
         w.min = false;
       }
       return w;
@@ -62,7 +62,7 @@ export default createReducer(initialState, {
   },
   [WINDOWS_MAX] : (state, id) => {
     state.list.map((w, i)=> {
-      if (id !== w.id) {
+      if (id === w.id) {
         w.max = true;
       }
       return w;
