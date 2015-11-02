@@ -9,11 +9,24 @@ export const MIN  = 1;
 export const MAX  = 2;
 export const CLOSE = 4;
 export const ALL = (MAX | MIN | CLOSE);
+const borderSize = 7;
+const resize = {
+  NONE: 'default',
+  TOP:'n-resize',
+  BOTTOM: 'n-resize',
+  LEFT: 'e-resize',
+  RIGHT: 'e-resize',
+  TOPLEFT: 'se-resize',
+  TOPRIGHT: 'sw-resize',
+  BOTTOMLEFT: 'sw-resize',
+  BOTTOMRIGHT: 'se-resize'
+};
 
 class Window extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     active: PropTypes.number,
+    onChangePos: PropTypes.func,
     onActive: PropTypes.func,
     onClose: PropTypes.func,
     onMax: PropTypes.func,
@@ -27,7 +40,9 @@ class Window extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      resizeType: 'NONE'
+    };
   }
 
   onActive() {
@@ -44,11 +59,57 @@ class Window extends React.Component {
   handleDrag(event, ui) {
     // console.log('Event: ', event);
     // console.log('Position: ', ui.position);
+    if (this.props.onChangePos) {
+      this.props.onChangePos({position: ui.position, id: this.props.config.id});
+    }
   }
 
   handleStop(event, ui) {
     // console.log('Event: ', event);
-    // console.log('Position: ', ui.position);
+    /*if (this.props.onChangePos) {
+      this.props.onChangePos({position: ui.position, id: this.props.config.id});
+    }*/
+  }
+
+
+  borderMouseMove(e) {
+    const {left, top, width, height} = this.props.config;
+    const x = e.clientX - borderSize * 2;
+    const y = e.clientY - borderSize * 2;
+    // console.log(x, y, left, top, left + height);
+
+    let resizeType = {
+      left: x <= left,
+      right: x >= left + width - borderSize,
+      top: y - borderSize <= top,
+      bottom: y >= top + height - borderSize,
+    };
+
+    console.log(resizeType, y, top);
+
+    if (resizeType.left && resizeType.top) {
+      resizeType = 'TOPLEFT';
+    } else if (resizeType.left && resizeType.bottom) {
+      resizeType = 'BOTTOMLEFT';
+    } else if (resizeType.right && resizeType.top) {
+      resizeType = 'TOPRIGHT';
+    } else if (resizeType.right && resizeType.bottom) {
+      resizeType = 'BOTTOMRIGHT';
+    } else if (!resizeType.right && !resizeType.bottom && !resizeType.left && !resizeType.top) {
+      resizeType = 'NONE';
+    } else if (resizeType.right) {
+      resizeType = 'RIGHT';
+    } else if (resizeType.left) {
+      resizeType = 'LEFT';
+    } else if (resizeType.top) {
+      resizeType = 'TOP';
+    } else if (resizeType.bottom) {
+      resizeType = 'BOTTOM';
+    }
+
+    this.setState({
+      resizeType: resizeType
+    });
   }
 
   // Todo: move style to class
@@ -59,34 +120,38 @@ class Window extends React.Component {
     const onClose  = () => !this.props.onClose || this.props.onClose(id);
     const onMin    = () => !this.props.onMin || this.props.onMin(id);
     const onMax    = () => !this.props.onMax || this.props.onMax(id);
-    let className = classNames({
+    const className = classNames({
+      'window-wrapper': true,
       'window-min': (min && (disabled ^ MIN)),
       'window-max': (max && (disabled ^ MAX))
     });
-    console.log(className, this.props);
+    // console.log(className, this.props);
     return (
         <Draggable
         handle='.window>header>.title,.window>header>.title>*'
         start={{x: left, y: top}}
         moveOnStartChange={false}
         zIndex={1800}
-        onStart={this.handleStart}
-        onDrag={this.handleDrag}
-        onStop={this.handleStop}
+        onStart={this.handleStart.bind(this)}
+        onDrag={this.handleDrag.bind(this)}
+        onStop={this.handleStop.bind(this)}
         bounds="parent"
         >
+
             <div
             {...diffProps(this, Window)}
             style={{
-              width:  `${width}px`,
-              height:  `${height}px`,
-              zIndex: (1000 + (500 - sort))
+              width:  `${(width + borderSize * 2)}px`,
+              height:  `${(height + borderSize * 2)}px`,
+              zIndex: (1000 + (500 - sort)),
+              cursor: resize[this.state.resizeType]
             }}
             className={className}
+            onMouseMove={this.borderMouseMove.bind(this)}
             >
                 <div
                   onMouseDown={this.onActive.bind(this)}
-                  className="window" style={{borderRadius: '6px', position: 'fixed !important'}}
+                  className="window" style={{borderRadius: '6px', position: 'fixed !important', margin: `${borderSize}px`}}
                   >
 
                     <header className="toolbar toolbar-header" style={{borderRadius: '6px 6px 0 0'}}>

@@ -8,6 +8,7 @@ const WINDOWS_CLOSE = 'WINDOWS_CLOSE';
 const WINDOWS_MIN = 'WINDOWS_MIN';
 const WINDOWS_MAX = 'WINDOWS_MAX';
 const WINDOWS_UNMIN = 'WINDOWS_UNMIN';
+const WINDOWS_CHANGE_POS = 'WINDOWS_CHANGE_POS';
 
 const initialState = {
   list: [],
@@ -31,7 +32,7 @@ export default createReducer(initialState, {
   },
   [WINDOWS_CLOSE] : (state, id) => {
     let newList = [];
-    state.list.forEach((w, i)=> {
+    state.list.forEach((w)=> {
       if (id !== w.id) {
         newList.push(w);
       }
@@ -41,7 +42,7 @@ export default createReducer(initialState, {
     return Object.assign({}, state);
   },
   [WINDOWS_MIN] : (state, id) => {
-    state.list.map((w, i)=> {
+    state.list.map((w)=> {
       if (id === w.id) {
         w.min = true;
       }
@@ -51,7 +52,7 @@ export default createReducer(initialState, {
     return Object.assign({}, state);
   },
   [WINDOWS_UNMIN] : (state, id) => {
-    state.list.map((w, i)=> {
+    state.list.map((w)=> {
       if (id === w.id) {
         w.min = false;
       }
@@ -61,9 +62,20 @@ export default createReducer(initialState, {
     return Object.assign({}, state);
   },
   [WINDOWS_MAX] : (state, id) => {
-    state.list.map((w, i)=> {
+    state.list.map((w)=> {
       if (id === w.id) {
         w.max = true;
+      }
+      return w;
+    });
+
+    return Object.assign({}, state);
+  },
+  [WINDOWS_CHANGE_POS] : (state, data) => {
+    state.list.map((w)=> {
+      if (data.id === w.id) {
+        w.left = data.position.left;
+        w.top = data.position.top;
       }
       return w;
     });
