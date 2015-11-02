@@ -96,15 +96,7 @@ export class HomeView extends Component {
                  onMin={this.props.actions.onMin}
                  onMax={this.props.actions.onMax}
                  key={i}
-                 left={w.left}
-                 top={w.top}
-                 width={w.width}
-                 height={w.height}
-                 title={w.id}
-                 id={w.id}
-                 max={w.max}
-                 min={w.min}
-                 sort={w.sort}
+                 config={w}
                  footer={[
                    <Button left>Отмента</Button>,
                    <Button Style="primary" right>Сохранить</Button>
@@ -138,12 +130,12 @@ export class HomeView extends Component {
           })}
 
          <Window
-            key={'test'} left={10} top={1} width={150} height={100} title={'title'} id={0} sort={100}>
+            key={'test'} config={{left:10, top:1, width:150, height:100, title:'title', id:0, sort:100}}>
             test
           </Window>
 
           <Window
-            key={'test2'} left={10} top={140} width={550} height={300} title={'title2'} id={0} sort={100}>
+            key={'test2'} config={{left:10, top:140, width:550, height:250, title:'title2', id:1, sort:100}}>
             <PaneGroup>
               <Pane sidebar size="sm">
                 <NavGroup>
@@ -164,7 +156,7 @@ export class HomeView extends Component {
           </Window>
 
           <Window
-            key={'test3'} left={40} top={140} width={550} height={300} title={'title3'} id={0} sort={100}>
+            key={'test3'} config={{left:80, top:200, width:550, height:250, title:'title3', id:1, sort:100}}>
             <PaneGroup>
               <Pane sidebar size="sm">
                 <ListGroup>
