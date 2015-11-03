@@ -58,9 +58,15 @@ class Window extends React.Component {
 
   handleDrag(event, ui) {
     // console.log('Event: ', event);
-    // console.log('Position: ', ui.position);
+    console.warn('Position: ', ui);
+    const conf = this.props.config;
+    const pos = {
+      left: ui.node.offsetWidth,
+      top: ui.node.offsetHeight
+    };
+
     if (this.props.onChangePos) {
-      this.props.onChangePos({position: ui.position, id: this.props.config.id});
+      this.props.onChangePos({position: ui.position, id: conf.id});
     }
   }
 
@@ -74,12 +80,14 @@ class Window extends React.Component {
 
   borderMouseMove(e) {
     const {left, top, width, height} = this.props.config;
-    const x = e.clientX - borderSize * 2;
-    const y = e.clientY - borderSize * 2;
-    // console.log(x, y, left, top, left + height);
+    const x = e.clientX;
+    const y = e.clientY;
+    console.info(`events: [${x}, ${y}]`);
+    console.info(`pos: [${left}, ${top}]`);
+    console.info(`size: [${left+width}, ${top+height}]`);
 
     let resizeType = {
-      left: x <= left,
+      left: x - borderSize <= left,
       right: x >= left + width - borderSize,
       top: y - borderSize <= top,
       bottom: y >= top + height - borderSize,
