@@ -82,6 +82,7 @@ export class HomeView extends Component {
     return (
       <div className='container'>
         <button className='btn btn-default'
+                style={{position: 'fixed'}}
                 onClick={this.props.actions.addWindow.bind(this)}>
           add window
         </button>
@@ -131,7 +132,7 @@ export class HomeView extends Component {
              );
           })}
 
-         <Window
+         { /*<Window
             key={'test'} config={{left:10, top:1, width:150, height:100, title:'title', id:0, sort:100}}>
             test
           </Window>
@@ -179,7 +180,7 @@ export class HomeView extends Component {
                 </Table>
               </Pane>
             </PaneGroup>
-          </Window>
+          </Window>*/ }
         </Windows>}
 
         <Taskbar position="bottom" windows={this.props.windows} onSelectWindow={this.props.actions.setActiveWindow} />

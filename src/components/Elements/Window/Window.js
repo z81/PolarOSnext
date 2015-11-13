@@ -89,11 +89,11 @@ class Window extends React.Component {
     let resizeType = {
       left: x - borderSize <= left,
       right: x >= left + width - borderSize,
-      top: y - borderSize <= top,
-      bottom: y >= top + height - borderSize,
+      top: y - borderSize * 2 <= top,
+      bottom: y >= top + height + borderSize,
     };
 
-    console.log(resizeType, y, top);
+    console.log(resizeType, y - borderSize * 2, top);
 
     if (resizeType.left && resizeType.top) {
       resizeType = 'TOPLEFT';
