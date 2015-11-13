@@ -41,7 +41,10 @@ class Window extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      resizeType: 'NONE'
+      resizeType: 'NONE',
+      isDrag: false,
+      isResize: false,
+      resizeStartPos: [0, 0]
     };
   }
 
@@ -51,12 +54,15 @@ class Window extends React.Component {
     }
   }
 
-  handleStart(event, ui) {
+  _handleStart(event, ui) {
+    this.setState({
+      isDrag: true
+    });
     // console.log('Event: ', event);
     // console.log('Position: ', ui.position);
   }
 
-  handleDrag(event, ui) {
+  _handleDrag(event, ui) {
     // console.log('Event: ', event);
     console.warn('Position: ', ui);
     const conf = this.props.config;
@@ -70,21 +76,41 @@ class Window extends React.Component {
     }
   }
 
-  handleStop(event, ui) {
+  _handleStop(event, ui) {
+    this.setState({
+      isDrag: false
+    });
     // console.log('Event: ', event);
-    /*if (this.props.onChangePos) {
+    /* if (this.props.onChangePos) {
       this.props.onChangePos({position: ui.position, id: this.props.config.id});
     }*/
   }
 
 
-  borderMouseMove(e) {
+  _borderMouseDown(e) {
+    if (e.button === 0 && this.state.resizeType !== 'NONE') {
+        this.setState({
+          isResize: true,
+          resizeStartPos: [e.clinetX, e.clientY]
+        });
+    }
+  }
+
+  _borderMouseUp(e) {
+    this.setState({
+      isResize: false
+    });
+  }
+
+  _borderMouseMove(e) {
+    if (this.state.isDrag) return false;
+
     const {left, top, width, height} = this.props.config;
     const x = e.clientX;
     const y = e.clientY;
-    console.info(`events: [${x}, ${y}]`);
+    /* console.info(`events: [${x}, ${y}]`);
     console.info(`pos: [${left}, ${top}]`);
-    console.info(`size: [${left+width}, ${top+height}]`);
+    console.info(`size: [${left+width}, ${top+height}]`);*/
 
     let resizeType = {
       left: x - borderSize <= left,
@@ -93,7 +119,7 @@ class Window extends React.Component {
       bottom: y >= top + height + borderSize,
     };
 
-    console.log(resizeType, y - borderSize * 2, top);
+    // console.log(resizeType, y - borderSize * 2, top);
 
     if (resizeType.left && resizeType.top) {
       resizeType = 'TOPLEFT';
@@ -140,9 +166,11 @@ class Window extends React.Component {
         start={{x: left, y: top}}
         moveOnStartChange={false}
         zIndex={1800}
-        onStart={this.handleStart.bind(this)}
-        onDrag={this.handleDrag.bind(this)}
-        onStop={this.handleStop.bind(this)}
+        onStart={this._handleStart.bind(this)}
+        onDrag={this._handleDrag.bind(this)}
+        onStop={this._handleStop.bind(this)}
+        onMouseDown={this._borderMouseDown.bind(this)}
+        onMouseUp={this._borderMouseUp.bind(this)}
         bounds="parent"
         >
 
@@ -155,7 +183,7 @@ class Window extends React.Component {
               cursor: resize[this.state.resizeType]
             }}
             className={className}
-            onMouseMove={this.borderMouseMove.bind(this)}
+            onMouseMove={this._borderMouseMove.bind(this)}
             >
                 <div
                   onMouseDown={this.onActive.bind(this)}
