@@ -5,3 +5,55 @@
 body {
   background: url('./background_10.jpg');
 }
+
+
+#loginScreen {
+  width: 100%;
+  height: 100%;
+  background: rgb(63, 175, 224);
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999999;
+
+  // http://www.gradient-animator.com/
+  background: linear-gradient(239deg, #1ba6cb, #2487d2, #7224d2, #249ed2, #24d29b, #47d224, #abd224, #c9d224, #d2a524, #d27724, #d24924);
+  background-size: 2200% 2200%;
+
+  -webkit-animation: AnimationName 9s ease infinite;
+  -moz-animation: AnimationName 9s ease infinite;
+  animation: AnimationName 9s ease infinite;
+
+  @-webkit-keyframes AnimationName {
+      0%{background-position:0% 88%}
+      50%{background-position:100% 13%}
+      100%{background-position:0% 88%}
+  }
+  @-moz-keyframes AnimationName {
+      0%{background-position:0% 88%}
+      50%{background-position:100% 13%}
+      100%{background-position:0% 88%}
+  }
+  @keyframes AnimationName {
+      0%{background-position:0% 88%}
+      50%{background-position:100% 13%}
+      100%{background-position:0% 88%}
+  }
+}
+
+#loginScreenWindow {
+  background: white;
+  display: inline-block;
+  width: 200px;
+  height: 150px;
+  border-radius: 5px;
+  position: fixed;
+  left: 50vw;
+  top: 50vh;
+  margin-left: -100px;
+  background-image: linear-gradient(to bottom, #e8e6e8 0, #DCDCDC 100%);
+  box-shadow: 0px 1px 6px black;
+  padding: 10px;
+}
