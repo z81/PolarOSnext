@@ -54,3 +54,8 @@ export function diffObject(obj, deleteProps) {
 export function diffProps(thisInst, component) {
   return diffObject(thisInst.props, Object.keys(component.propTypes));
 }
+
+export function hideLoadingScreen() {
+  loadingScreen.className = 'hiddenOpacity';
+  setTimeout(() => loadingScreen.style.display = 'none', 1000);
+}

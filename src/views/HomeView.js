@@ -19,6 +19,9 @@ import {
 import {
   Taskbar
 } from '../components';
+import {
+  hideLoadingScreen
+} from '../utils';
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
@@ -69,7 +72,7 @@ export class HomeView extends Component {
       title: '11111',
       active: 0
     };
-    loadingScreen.style.display = 'none';
+    hideLoadingScreen();
   }
 
   changeTitle() {
