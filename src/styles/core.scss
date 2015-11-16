@@ -19,12 +19,12 @@ body {
   z-index: 999999;
 
   // http://www.gradient-animator.com/
-  background: linear-gradient(239deg, #1ba6cb, #2487d2, #7224d2, #249ed2, #24d29b, #47d224, #abd224, #c9d224, #d2a524, #d27724, #d24924);
+  background: linear-gradient(180deg, #1ba6cb, #2487d2, #7224d2, #249ed2, #24d29b, #47d224, #abd224, #c9d224, #d2a524, #d27724, #d24924);
   background-size: 2200% 2200%;
 
-  -webkit-animation: AnimationName 9s ease infinite;
-  -moz-animation: AnimationName 9s ease infinite;
-  animation: AnimationName 9s ease infinite;
+  -webkit-animation: AnimationName 90s ease infinite;
+  -moz-animation: AnimationName 90s ease infinite;
+  animation: AnimationName 90s ease infinite;
 
   @-webkit-keyframes AnimationName {
       0%{background-position:0% 88%}
