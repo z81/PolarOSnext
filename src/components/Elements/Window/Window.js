@@ -9,7 +9,7 @@ export const MIN  = 1;
 export const MAX  = 2;
 export const CLOSE = 4;
 export const ALL = (MAX | MIN | CLOSE);
-const borderSize = 7;
+const borderSizeDefault = 7;
 const resize = {
   NONE: 'default',
   TOP:'n-resize',
@@ -113,10 +113,10 @@ class Window extends React.Component {
     console.info(`size: [${left+width}, ${top+height}]`);*/
 
     let resizeType = {
-      left: x - borderSize <= left,
-      right: x >= left + width - borderSize,
-      top: y - borderSize * 2 <= top,
-      bottom: y >= top + height + borderSize,
+      left: x - borderSizeDefault <= left,
+      right: x >= left + width - borderSizeDefault,
+      top: y - borderSizeDefault * 2 <= top,
+      bottom: y >= top + height + borderSizeDefault,
     };
 
     // console.log(resizeType, y - borderSize * 2, top);
@@ -141,9 +141,24 @@ class Window extends React.Component {
       resizeType = 'BOTTOM';
     }
 
-    this.setState({
-      resizeType: resizeType
-    });
+    if (e.buttons === 1) {
+      if (this.state.isDrag !== true) {
+        // console.info('Resize start', e.pageX, e.pageY);
+        this.state.isDrag = true;
+        this.state.resizeStartPos = [e.pageX, e.pageY];
+      } else {
+        // console.info('Resize progress', e.pageX, e.pageY);
+        // this.state.left = this.state.resizeStartPos[0] - e.pageX;
+        // this.state.top  = this.state.resizeStartPos[1] - e.pageY;
+      }
+    } else {
+      // console.info('Resize stop');
+      this.state.isDrag = false;
+    }
+
+    this.state.resizeType = resizeType;
+
+    this.setState(this.state);
   }
 
   // Todo: move style to class
@@ -154,6 +169,7 @@ class Window extends React.Component {
     const onClose  = () => !this.props.onClose || this.props.onClose(id);
     const onMin    = () => !this.props.onMin || this.props.onMin(id);
     const onMax    = () => !this.props.onMax || this.props.onMax(id);
+    const borderSize = borderSizeDefault; //this.state.isDrag ? 1000 : borderSizeDefault;
     const className = classNames({
       'window-wrapper': true,
       'window-min': (min && (disabled ^ MIN)),
@@ -169,11 +185,8 @@ class Window extends React.Component {
         onStart={this._handleStart.bind(this)}
         onDrag={this._handleDrag.bind(this)}
         onStop={this._handleStop.bind(this)}
-        onMouseDown={this._borderMouseDown.bind(this)}
-        onMouseUp={this._borderMouseUp.bind(this)}
         bounds="parent"
         >
-
             <div
             {...diffProps(this, Window)}
             style={{

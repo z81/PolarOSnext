@@ -69,6 +69,7 @@ export class HomeView extends Component {
       title: '11111',
       active: 0
     };
+    loadingScreen.style.display = 'none';
   }
 
   changeTitle() {
