@@ -136,7 +136,8 @@ export class HomeView extends Component {
              );
           })}
 
-         { /*<Window
+         { /*
+           <Window
             key={'test'} config={{left:10, top:1, width:150, height:100, title:'title', id:0, sort:100}}>
             test
           </Window>

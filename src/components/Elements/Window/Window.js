@@ -112,16 +112,26 @@ class Window extends React.Component {
     console.info(`pos: [${left}, ${top}]`);
     console.info(`size: [${left+width}, ${top+height}]`);*/
 
-    let resizeType = {
-      left: x - borderSizeDefault <= left,
-      right: x >= left + width - borderSizeDefault,
-      top: y - borderSizeDefault * 2 <= top,
-      bottom: y >= top + height + borderSizeDefault,
-    };
+    const _top = (y - borderSizeDefault * 2 <= top) ? 1 : 0;
+    const _bottom = (y >= top + height + borderSizeDefault) ? 3 : 0;
+    const _left = (x - borderSizeDefault <= left) ? 7 : 0;
+    const _right = (x >= left + width - borderSizeDefault) ? 11 : 0;
 
-    // console.log(resizeType, y - borderSize * 2, top);
+    /*eslint-disable */
+    const resizeType = ([
+      'NONE'        , 'TOP'    ,
+      null          , 'BOTTOM' ,
+      null          , null     ,
+      null          , 'LEFT'   ,
+      'TOPLEFT'     , null     ,
+      'BOTTOMLEFT'  , 'RIGHT'  ,
+      'TOPRIGHT'    , null     ,
+      'BOTTOMRIGHT' , null     ,
+    ])[_top + _left + _right + _bottom];
+    /*eslint-enable */
 
-    if (resizeType.left && resizeType.top) {
+
+    /* if (resizeType.left && resizeType.top) {
       resizeType = 'TOPLEFT';
     } else if (resizeType.left && resizeType.bottom) {
       resizeType = 'BOTTOMLEFT';
@@ -139,7 +149,7 @@ class Window extends React.Component {
       resizeType = 'TOP';
     } else if (resizeType.bottom) {
       resizeType = 'BOTTOM';
-    }
+    }*/
 
     if (e.buttons === 1) {
       if (this.state.isDrag !== true) {
